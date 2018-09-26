@@ -9,8 +9,11 @@
 # production
 /build
 
-# web
+# ide
 .idea
+
+yarn.lock
+package-lock.json
 
 # misc
 .DS_Store
