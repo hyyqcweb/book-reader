@@ -2,7 +2,8 @@ import { constants } from './index';
 import { fromJS } from 'immutable';
 
 const defaultState = fromJS({
-    SearchList: []
+    SearchList: [],
+    SearchLoading: true
 });
 
 const changeData = (state, action) => {
