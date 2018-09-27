@@ -15,6 +15,10 @@ export default (state=defaultState, action) => {
     switch (action.type) {
         case constants.CHNAGE_LIST:
             return changeData(state, action.SearchList);
+        case constants.BACK:
+            return state.merge({
+                SearchList: []
+            });
         default:
             return state
     }

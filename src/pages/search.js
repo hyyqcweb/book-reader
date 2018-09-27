@@ -13,14 +13,14 @@ class Search extends React.Component {
     }
 
     render() {
-        const { handleSearch, SearchList } = this.props;
+        const { handleSearch, SearchList, handleBack } = this.props;
         // 解构
         let List = SearchList.toJS();
         return (
             <div>
                 <div className="header">
                     <div className="left">
-                        <Link to="/">
+                        <Link to="/" onClick={handleBack} >
                             <Icon type="arrow-left" theme="outlined" />
                         </Link>
                     </div>
@@ -58,6 +58,9 @@ const mapDispatchToProps = (dispatch) => {
             }else {
                 dispatch(actionCreators.getList(e))
             }
+        },
+        handleBack() {
+            dispatch(actionCreators.back())
         }
     }
 };

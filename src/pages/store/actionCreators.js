@@ -7,6 +7,10 @@ const changeList = (result) => ({
     SearchList: result
 });
 
+export const back = () => ({
+   type: constants.BACK
+});
+
 export const getList = (value) => {
     return (dispatch) => {
         axios.get(`https://www.apiopen.top/novelSearchApi?name=${value}`)
