@@ -36,7 +36,7 @@ class Search extends React.Component {
                             {item}
                         </li>
                     })}
-                </div> : <EmptyList />}
+                </div> : <EmptyList data="search" />}
             </div>
 
         )
