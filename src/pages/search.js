@@ -15,7 +15,7 @@ class Search extends React.Component {
     }
 
     render() {
-        const {handleSearch, SearchList, handleBack} = this.props;
+        const { handleSearch, SearchList, handleBack, handleDetail } = this.props;
 
         let List;
         if (SearchList === null) {
@@ -24,8 +24,6 @@ class Search extends React.Component {
             // 解构
             List = SearchList.toJS();
         }
-
-
         return (
             <div>
                 <div className="header">
@@ -40,13 +38,16 @@ class Search extends React.Component {
                         style={{height: 40, marginTop: 10, padding: '0px 10px'}}
                     />
                 </div>
-                <Spin className='loading' spinning={false} tip="书籍搜索中...">
+                {/*<Spin className='loading' spinning={false} tip="书籍搜索中...">*/}
 
-                </Spin>
-                {List.length ? <div>
+                {/*</Spin>*/}
+                {List.length ? <div className="content">
                     {List.map((item, index) => {
-                        return <li key={index} className="search-item">
-                            {item}
+                        return <li key={index} className="search-item" onClick={() => handleDetail(item)}>
+                            <img src={item.cover} alt=""/>
+                            <p className="title">{item.title}</p>
+                            <p><Icon type="user" theme="outlined" /> {item.author}</p>
+                            <p className="desc">{item.desc}</p>
                         </li>
                     })}
                 </div> : <EmptyList data="search"/>}
@@ -74,6 +75,10 @@ const mapDispatchToProps = (dispatch) => {
         },
         handleBack() {
             dispatch(actionCreators.back())
+        },
+        handleDetail(item) {
+            // dispatch(actionCreators.getDetail(item));
+            console.log(item);
         }
     }
 };

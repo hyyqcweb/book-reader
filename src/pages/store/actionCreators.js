@@ -13,13 +13,19 @@ export const back = () => ({
 
 export const getList = (value) => {
     return (dispatch) => {
-        axios.get(`https://www.apiopen.top/novelSearchApi?name=${value}`)
+        axios.get(`https://www.apiopen.top/novelInfoApi?name=${value}`)
             .then(res => {
                 const result = res.data.data;
-                dispatch(changeList(result))
+                dispatch(changeList(result.data))
             })
             .catch(err => {
                 console.log(err)
             });
     }
 };
+
+// export const getDetail = (item) => {
+//     return (dispatch) => {
+//         axios
+//     }
+// }
