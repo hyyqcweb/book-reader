@@ -14,8 +14,16 @@ class Search extends React.Component {
 
     render() {
         const { handleSearch, SearchList, handleBack } = this.props;
-        // 解构
-        let List = SearchList.toJS();
+
+        let List;
+        if(SearchList === null) {
+            List = [];
+        }else {
+           // 解构
+           List = SearchList.toJS();
+        }
+
+
         return (
             <div>
                 <div className="header">
