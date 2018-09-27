@@ -4,7 +4,7 @@ import './style.less';
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux';
 import {actionCreators} from './store';
-import {EmptyList} from '../components';
+import { EmptyList } from '../components';
 
 class Search extends React.Component {
     constructor(props) {
@@ -45,7 +45,7 @@ class Search extends React.Component {
                     {List.map((item, index) => {
                         return <li key={index} className="search-item" onClick={() => handleDetail(item)}>
                             <img src={item.cover} alt=""/>
-                            <p className="title">{item.title}</p>
+                            <Link to={ '/detail/' + index}> <p className="title">{item.title}</p> </Link>
                             <p><Icon type="user" theme="outlined" /> {item.author}</p>
                             <p className="desc">{item.desc}</p>
                         </li>
@@ -77,8 +77,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actionCreators.back())
         },
         handleDetail(item) {
-            // dispatch(actionCreators.getDetail(item));
-            console.log(item);
+            dispatch(actionCreators.getDetail(item));
         }
     }
 };

@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { constants } from './index';
-import { fromJS } from 'immutable'
 
 const changeList = (result) => ({
     type: constants.CHNAGE_LIST,
@@ -24,8 +23,7 @@ export const getList = (value) => {
     }
 };
 
-// export const getDetail = (item) => {
-//     return (dispatch) => {
-//         axios
-//     }
-// }
+export const getDetail = (item) => ({
+    type: constants.DETAIL,
+    item
+});
