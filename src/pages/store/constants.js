@@ -1,0 +1,1 @@
+export const CHNAGE_LIST = 'search/change_list';

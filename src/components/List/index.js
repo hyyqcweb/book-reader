@@ -2,8 +2,6 @@ import React from 'react';
 import './style.less';
 
 export default ( {data} ) => {
-
-    console.log(data);
     return (
         <div className="item">
             {data.map( (item, index) => {
