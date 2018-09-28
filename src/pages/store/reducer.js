@@ -4,7 +4,7 @@ import { fromJS } from 'immutable';
 const defaultState = fromJS({
     SearchList: [],
     SearchLoading: true,
-    DetailList: []
+    DetailList: {}
 });
 
 const changeData = (state, action) => {
@@ -22,16 +22,8 @@ export default (state=defaultState, action) => {
                 SearchList: []
             });
         case constants.DETAIL:
-            console.log(action.item);
-            let ai = action.item;
-            let array = [];
-            for (let i in ai) {
-                let o = {};
-                o[i] = ai[i];
-                array.push(o)
-            }
             return state.merge({
-                DetailList: array
+                DetailList: action.item
             });
         default:
             return state
