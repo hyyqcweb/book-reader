@@ -51,11 +51,9 @@ class Search extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        SearchList: state.getIn(['header', 'SearchList'])
-    }
-};
+const mapStateToProps = (state) => ({
+     SearchList: state.getIn(['header', 'SearchList'])
+});
 
 const mapDispatchToProps = (dispatch) => {
     return {
