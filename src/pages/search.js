@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {Icon, Input, message, Spin} from 'antd';
 import './style.less';
 import {Link} from 'react-router-dom'
@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import {actionCreators} from './store';
 import { EmptyList, ResuleList } from '../components';
 
-class Search extends React.Component {
+class Search extends Component {
     constructor(props) {
         super(props);
         this.state = {}
@@ -58,6 +58,8 @@ const mapStateToProps = (state) => ({
      SearchList: state.getIn(['header', 'SearchList']),
      loading: state.getIn(['header','loading'])
 });
+
+// fixme 可以无限次搜索,非常耗性能
 
 const mapDispatchToProps = (dispatch) => {
     return {

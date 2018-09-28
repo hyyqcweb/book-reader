@@ -25,7 +25,7 @@ export default (state=defaultState, action) => {
             });
         case constants.DETAIL:
             return state.merge({
-                DetailList: action.item
+                DetailList: action.result
             });
         case constants.CLOSELOADING:
             return state.merge({

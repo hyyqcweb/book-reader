@@ -8,6 +8,11 @@ const changeList = (result,loading) => ({
     loading
 });
 
+const changeDetail = (result) => ({
+    type: constants.DETAIL,
+    result
+});
+
 export const back = () => ({
    type: constants.BACK
 });
@@ -30,7 +35,15 @@ export const getList = (value,loading) => {
     }
 };
 
-export const getDetail = (item) => ({
-    type: constants.DETAIL,
-    item
-});
+export const getDetail = (item) => {
+    return (dispatch) => {
+        axios.get(`${ApiUrl}/book-info/${item._id}`)
+            .then(res => {
+                const result = res.data;
+                dispatch(changeDetail(result))
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+};
