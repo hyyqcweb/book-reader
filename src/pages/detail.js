@@ -3,8 +3,7 @@ import { connect } from 'react-redux'
 import './style.less';
 import {actionCreators} from './store';
 import {Link} from 'react-router-dom';
-import {Icon, Button, Tag} from 'antd';
-import {ColorArray, ImgUrl} from '../config'
+import {Icon} from 'antd';
 import {Details} from '../components'
 
 class Detail extends Component {
@@ -15,12 +14,6 @@ class Detail extends Component {
     render() {
         const { DetailList,handleBack } = this.props;
         let List = DetailList.toJS();
-        console.log(List);
-
-        // let tags;
-        // if(JSON.stringify(List) !== "{}") {
-        //     tags = List.tags.split(',');
-        // }
 
         return (
             <div>
