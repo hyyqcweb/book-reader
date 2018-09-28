@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import './style.less';
 import {actionCreators} from './store';
 import {Link} from 'react-router-dom';
 import {Icon, Button, Tag} from 'antd';
+import {ColorArray} from '../config'
 
-class Detail extends React.Component {
+class Detail extends Component {
     constructor(props) {
         super(props);
         this.state= {}
@@ -14,11 +15,9 @@ class Detail extends React.Component {
         const { DetailList,handleBack } = this.props;
         let List = DetailList.toJS();
         let tags;
-        console.log(List);
         if(JSON.stringify(List) !== "{}") {
             tags = List.tags.split(',');
         }
-        let colorArray = ['#f50','#2db7f5','#87d068','#108ee9'];
         return (
             <div>
                 <div className="header">
@@ -50,7 +49,7 @@ class Detail extends React.Component {
                     </div>
                     <div className="tags">
                         {tags !== undefined ? tags.map((item,index) => {
-                            return <Tag key={index} color={colorArray[Math.ceil(Math.random() * colorArray.length-1)]}>{item}</Tag>
+                            return <Tag key={index} color={ColorArray[Math.ceil(Math.random() * ColorArray.length-1)]}>{item}</Tag>
                         }) : ""}
                     </div>
                     <div className="abstract">

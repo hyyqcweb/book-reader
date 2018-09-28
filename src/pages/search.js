@@ -43,7 +43,7 @@ class Search extends React.Component {
 
                 {/*</Spin>*/}
                 {List.length ? <div className="content">
-                    {List.map((item) => <ResuleList key={item._id} data={item}  handleDetail={handleDetail}/>)}
+                    {List.map((item) => <ResuleList key={item._id} data={item} handleDetail={handleDetail}/>)}
                 </div> : <EmptyList data="search"/>}
             </div>
 

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { constants } from './index';
+import { ApiUrl } from '../../config'
 
 const changeList = (result) => ({
     type: constants.CHNAGE_LIST,
@@ -12,10 +13,9 @@ export const back = () => ({
 
 export const getList = (value) => {
     return (dispatch) => {
-        axios.get(`https://novel.juhe.im/search?keyword=${value}`)
+        axios.get(`${ApiUrl}/search?keyword=${value}`)
             .then(res => {
                 const result = res.data.books;
-                console.log(result);
                 dispatch(changeList(result))
             })
             .catch(err => {
