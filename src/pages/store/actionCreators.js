@@ -12,10 +12,11 @@ export const back = () => ({
 
 export const getList = (value) => {
     return (dispatch) => {
-        axios.get(`https://www.apiopen.top/novelInfoApi?name=${value}`)
+        axios.get(`https://novel.juhe.im/search?keyword=${value}`)
             .then(res => {
-                const result = res.data.data;
-                dispatch(changeList(result.data))
+                const result = res.data.books;
+                console.log(result);
+                dispatch(changeList(result))
             })
             .catch(err => {
                 console.log(err)

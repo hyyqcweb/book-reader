@@ -4,7 +4,7 @@ import './style.less';
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux';
 import {actionCreators} from './store';
-import { EmptyList } from '../components';
+import { EmptyList, ResuleList } from '../components';
 
 class Search extends React.Component {
     constructor(props) {
@@ -24,6 +24,7 @@ class Search extends React.Component {
             // 解构
             List = SearchList.toJS();
         }
+        console.log(List);
         return (
             <div>
                 <div className="header">
@@ -42,14 +43,7 @@ class Search extends React.Component {
 
                 {/*</Spin>*/}
                 {List.length ? <div className="content">
-                    {List.map((item, index) => {
-                        return <li key={index} className="search-item" onClick={() => handleDetail(item)}>
-                            <img src={item.cover} alt=""/>
-                            <Link to={ '/detail/' + index}> <p className="title">{item.title}</p> </Link>
-                            <p><Icon type="user" theme="outlined" /> {item.author}</p>
-                            <p className="desc">{item.desc}</p>
-                        </li>
-                    })}
+                    {List.map((item) => <ResuleList key={item._id} data={item}  handleDetail={handleDetail}/>)}
                 </div> : <EmptyList data="search"/>}
             </div>
 
