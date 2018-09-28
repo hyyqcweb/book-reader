@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import './style.less';
 import {actionCreators} from './store';
 import {Link} from 'react-router-dom';
-import {Icon} from 'antd';
+import {Icon, message} from 'antd';
 import {Details} from '../components'
 
 class Detail extends Component {
@@ -12,7 +12,7 @@ class Detail extends Component {
         this.state= {}
     }
     render() {
-        const { DetailList,handleBack } = this.props;
+        const { DetailList,handleBack, addBook, removeBook, text } = this.props;
         let List = DetailList.toJS();
 
         return (
@@ -25,20 +25,29 @@ class Detail extends Component {
                         <span className="title">书籍详情</span>
                     </div>
                 </div>
-                <Details data={List}/>
+                <Details data={List} addBook={addBook} text={text} removeBook={removeBook}/>
             </div>
         )
     }
 }
 
 const mapStateToProps = (state) => ({
-    DetailList: state.getIn(['header','DetailList'])
+    DetailList: state.getIn(['header','DetailList']),
+    text: state.getIn(['header','text'])
 });
 
 const mapDispatchToProps = (dispatch) => {
     return {
         handleBack() {
             dispatch(actionCreators.back())
+        },
+        addBook(item) {
+            dispatch(actionCreators.addBook(item,false));
+            message.success('加入书架成功');
+        },
+        removeBook(item) {
+            dispatch(actionCreators.removeBook(item, true));
+            message.warning('成功移出书架');
         }
     }
 };

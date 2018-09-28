@@ -5,14 +5,13 @@ import moment from 'moment';
 import 'moment/locale/zh-cn';
 import './style.less';
 
-export default ({data}) => {
+export default ({data, addBook, removeBook, text}) => {
     const {cover, title, author, cat, wordCount, updated, latelyFollower, retentionRatio, serializeWordCount, tags, longIntro} = data;
-
     let wordage;
-    if(JSON.stringify(data) !== "{}") {
-        if( (wordCount / 10000).toFixed(1) > 1 ) {
+    if (JSON.stringify(data) !== "{}") {
+        if ((wordCount / 10000).toFixed(1) > 1) {
             wordage = (wordCount / 10000).toFixed(1) + '万字';
-        }else {
+        } else {
             wordage = wordCount + '字';
         }
     }
@@ -20,16 +19,19 @@ export default ({data}) => {
     return (
         <div className="detailContent">
             <div className="title">
-                <img src={ImgUrl +cover} alt=""/>
+                <img src={ImgUrl + cover} alt=""/>
                 <p>
                     <span>{title}</span>
                     <span className="desc"><em>{author}</em> | {cat} | {wordage}</span>
-                    <span className="hot">更新: {moment(updated,'YYYYMMDD').fromNow()} </span>
+                    <span className="hot">更新: {moment(updated, 'YYYYMMDD').fromNow()} </span>
                 </p>
             </div>
             <div className="nav">
-                <Button className="button" type="danger" icon="plus" >追更新</Button>
-                <Button className="button" type="danger" icon="search">开始阅读</Button>
+                {text ?
+                    <Button className="button plus" type="danger" icon="plus" onClick={() => addBook(data)}>追更新</Button> :
+                    <Button className="button minus"  type="danger" icon="minus" onClick={() => removeBook(data)}>不追了</Button>
+                }
+                <Button className="button plus" type="danger" icon="search">开始阅读</Button>
             </div>
             <div className="words">
                 <p>
@@ -46,8 +48,9 @@ export default ({data}) => {
                 </p>
             </div>
             <div className="tags">
-                {tags ? tags.map((item,index) => {
-                    return <Tag key={index} color={ColorArray[Math.ceil(Math.random() * ColorArray.length-1)]}>{item}</Tag>
+                {tags ? tags.map((item, index) => {
+                    return <Tag key={index}
+                                color={ColorArray[Math.ceil(Math.random() * ColorArray.length - 1)]}>{item}</Tag>
                 }) : ""}
             </div>
             <div className="abstract">

@@ -47,3 +47,15 @@ export const getDetail = (item) => {
             })
     }
 };
+
+export const addBook = (item, value) => ({
+    type: constants.ADDBOOK,
+    item,
+    value
+});
+
+export const removeBook = (item, value) => ({
+    type: constants.REMOVEBOOK,
+    item,
+    value
+});

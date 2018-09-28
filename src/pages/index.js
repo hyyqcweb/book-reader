@@ -1,25 +1,32 @@
 import React, {Component} from 'react';
 import Header from './header';
 import { EmptyList, List } from '../components'
-import './style.less'
+import './style.less';
+import {connect} from 'react-redux';
 
-export default class App extends Component{
+ class App extends Component{
+
     constructor(props) {
         super(props);
-        this.state = {
-            list: []
-        }
+        this.state = {}
     }
 
     render() {
-        const { list } = this.state;
+        const { HomeList } = this.props;
+        let Lists = HomeList.toJS();
+        let localList = localStorage.setItem('localList',JSON.stringify(Lists));
         return (
             <div>
                 <Header />
                 <div className="content">
-                    {this.state.list.length ? <List data={list}/> : <EmptyList />}
+                    {Lists.length ? <List data={localList}/> : <EmptyList />}
                 </div>
             </div>
         )
     }
 }
+const mapStateToProps = (state) => ({
+    HomeList: state.getIn(['header', 'HomeList'])
+});
+
+export default connect(mapStateToProps, null)(App)
