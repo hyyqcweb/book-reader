@@ -9,22 +9,26 @@ import { EmptyList, ResuleList } from '../components';
 class Search extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            loading: false
-        };
+        this.state = {}
+    }
+
+    componentDidUpdate() {
+        if( this.props.SearchList.toJS().length ) {
+            this.props.handleCloseLoading()
+        }
     }
 
     render() {
-        const { handleSearch, SearchList, handleBack, handleDetail } = this.props;
+        const { handleSearch, SearchList, handleBack, handleDetail, loading } = this.props;
 
         let List;
         if (SearchList === null) {
             List = [];
         } else {
-            // 解构
+            // 解构formJS
             List = SearchList.toJS();
         }
-        console.log(List);
+
         return (
             <div>
                 <div className="header">
@@ -39,12 +43,11 @@ class Search extends React.Component {
                         style={{height: 40, marginTop: 10, padding: '0px 10px'}}
                     />
                 </div>
-                {/*<Spin className='loading' spinning={false} tip="书籍搜索中...">*/}
-
-                {/*</Spin>*/}
-                {List.length ? <div className="content">
-                    {List.map((item) => <ResuleList key={item._id} data={item} handleDetail={handleDetail}/>)}
-                </div> : <EmptyList data="search"/>}
+                <Spin className='loading' spinning={loading} tip="书籍搜索中...">
+                    {List.length ? <div className="content">
+                        {List.map((item) => <ResuleList key={item._id} data={item} handleDetail={handleDetail}/>)}
+                    </div> : <EmptyList data="search"/>}
+                </Spin>
             </div>
 
         )
@@ -52,7 +55,8 @@ class Search extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-     SearchList: state.getIn(['header', 'SearchList'])
+     SearchList: state.getIn(['header', 'SearchList']),
+     loading: state.getIn(['header','loading'])
 });
 
 const mapDispatchToProps = (dispatch) => {
@@ -62,7 +66,7 @@ const mapDispatchToProps = (dispatch) => {
                 message.info('请输入内容!');
                 return false;
             } else {
-                dispatch(actionCreators.getList(e));
+                dispatch(actionCreators.getList(e, true));
             }
         },
         handleBack() {
@@ -70,6 +74,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         handleDetail(item) {
             dispatch(actionCreators.getDetail(item));
+        },
+        handleCloseLoading() {
+            dispatch(actionCreators.closeLoading(false))
         }
     }
 };

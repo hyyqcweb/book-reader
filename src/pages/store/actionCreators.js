@@ -2,21 +2,27 @@ import axios from 'axios';
 import { constants } from './index';
 import { ApiUrl } from '../../config'
 
-const changeList = (result) => ({
+const changeList = (result,loading) => ({
     type: constants.CHNAGE_LIST,
-    SearchList: result
+    SearchList: result,
+    loading
 });
 
 export const back = () => ({
    type: constants.BACK
 });
 
-export const getList = (value) => {
+export const closeLoading = (value) => ({
+    type: constants.CLOSELOADING,
+    value
+});
+
+export const getList = (value,loading) => {
     return (dispatch) => {
         axios.get(`${ApiUrl}/search?keyword=${value}`)
             .then(res => {
                 const result = res.data.books;
-                dispatch(changeList(result))
+                dispatch(changeList(result,loading))
             })
             .catch(err => {
                 console.log(err)
