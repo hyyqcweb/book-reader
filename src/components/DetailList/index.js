@@ -4,17 +4,10 @@ import {Button, Tag} from 'antd';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 import './style.less';
+import { WordConversion } from '../../config/utils'
 
 export default ({data, addBook, removeBook, text}) => {
     const {cover, title, author, cat, wordCount, updated, latelyFollower, retentionRatio, serializeWordCount, tags, longIntro} = data;
-    let wordage;
-    if (JSON.stringify(data) !== "{}") {
-        if ((wordCount / 10000).toFixed(1) > 1) {
-            wordage = (wordCount / 10000).toFixed(1) + '万字';
-        } else {
-            wordage = wordCount + '字';
-        }
-    }
 
     return (
         <div className="detailContent">
@@ -22,7 +15,7 @@ export default ({data, addBook, removeBook, text}) => {
                 <img src={ImgUrl + cover} alt=""/>
                 <p>
                     <span>{title}</span>
-                    <span className="desc"><em>{author}</em> | {cat} | {wordage}</span>
+                    <span className="desc"><em>{author}</em> | {cat} | <WordConversion data={data} wordCount={wordCount}/></span>
                     <span className="hot">更新: {moment(updated, 'YYYYMMDD').fromNow()} </span>
                 </p>
             </div>
