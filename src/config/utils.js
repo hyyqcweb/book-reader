@@ -20,7 +20,6 @@ export const WordConversion = ({data, wordCount, search}) => {
                 wordage = wordCount + '字';
             }
         }
-
     }
 
     return (
