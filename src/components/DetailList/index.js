@@ -28,15 +28,15 @@ export default ({data, addBook, removeBook, text}) => {
             </div>
             <div className="words">
                 <p>
-                    <div className="profile">追书人数</div>
+                    <dd className="profile">追书人数</dd>
                     {latelyFollower}
                 </p>
                 <p>
-                    <div className="profile">读者留存率</div>
+                    <dd className="profile">读者留存率</dd>
                     {retentionRatio}%
                 </p>
                 <p>
-                    <div className="profile">日更新字数</div>
+                    <dd className="profile">日更新字数</dd>
                     {serializeWordCount}
                 </p>
             </div>

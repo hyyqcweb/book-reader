@@ -6312,6 +6312,10 @@ react-slick@~0.23.1:
     lodash.debounce "^4.0.8"
     resize-observer-polyfill "^1.5.0"
 
+react-tappable@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/react-tappable/-/react-tappable-1.0.4.tgz#282b7b3dc25e6170b55d1ea33d986b7624a19fb9"
+
 react@^16.5.2:
   version "16.5.2"
   resolved "https://registry.yarnpkg.com/react/-/react-16.5.2.tgz#19f6b444ed139baa45609eee6dc3d318b3895d42"
